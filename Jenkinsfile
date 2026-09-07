@@ -9,6 +9,15 @@ pipeline {
             }
         }
 
+        stage('List Java Files') {
+            steps {
+                sh '''
+                    echo "Java files in the application:"
+                    find src/main/java -type f -name "*.java"
+                '''
+            }
+        }
+
         stage('Test') {
             steps {
                 sh 'mvn clean test'
@@ -21,5 +30,16 @@ pipeline {
             }
         }
 
+        stage('List JAR Files') {
+            steps {
+                sh '''
+                    echo "JAR files generated:"
+                    find target -type f -name "*.jar"
+                '''
+            }
+        }
+
     }
 }
+
+
